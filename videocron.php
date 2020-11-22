@@ -50,7 +50,7 @@ copy($input, $double);
 $db->query("UPDATE  ".DB_PREFIX."videos SET tmp_source='',duration='".intval($duration)."'  WHERE id = '".intval($cron->id)."'");
 //Extract thumbnail
 // $imgout = '{ffmpeg-cmd} -i {input} -vf "select=gt(scene,0.3)" -frames:v 5 -vsync vfr -vf fps=fps=1/60 -qscale:v 2 {token}-%02d.jpg';
-$imgout = '{ffmpeg-cmd} -i {input} -frames:v 5 -vsync vfr -qscale:v 2 {token}-%02d.jpg';
+$imgout = '{ffmpeg-cmd} -i {input} -ss 2 -frames:v 5 -vsync vfr -qscale:v 2 {token}-%02d.jpg';
 $imgfinal = $ip.$cron->token;
 $thumb = str_replace(ABSPATH.'/' ,'',$ip.$cron->token.'-01.jpg');
 $imgout = str_replace(array('{ffmpeg-cmd}','{input}','{token}'),array(get_option('ffmpeg-cmd','ffmpeg'), $input,$imgfinal), $imgout);
